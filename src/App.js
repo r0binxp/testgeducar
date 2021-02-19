@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import '../src/App.scss';
+import store from './store'
+import { Provider } from 'react-redux'
+import Grid from '@material-ui/core/Grid'
+import { makeStyles } from '@material-ui/core/styles';
+import Users from './components/Users';
+import Posts from './components/Posts';
 
-function App() {
+
+const useStyles = makeStyles({
+  title: {
+   textAlign: 'center',
+   fontSize: '30px',
+   fontFamily: 'Tahoma',
+  },
+  container: {
+    backgroundColor: '#efefef'
+  }
+ 
+});
+
+function App(props) {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={ store }>
+      <Grid container className={classes.container}>
+        <Grid item md={12}>
+          <h1 className={classes.title}>Geduca Test</h1>
+        </Grid>
+        <Grid item md={12} mb={5} p={3}>
+          <Users/>
+          <Posts/>
+        </Grid>
+      </Grid>
+    </Provider>
   );
 }
 
